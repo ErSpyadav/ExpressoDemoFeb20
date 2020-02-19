@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ExpressTestApp18Feb2020</string>
+    <string name="dialog_msg">Dialog message</string>
 </resources>

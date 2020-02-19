@@ -16,8 +16,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
+import static androidx.test.espresso.matcher.RootMatchers.isTouchable;
 import static androidx.test.espresso.matcher.ViewMatchers.hasContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.hasFocus;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
@@ -69,6 +73,26 @@ public class ExpressoTest1 {
 
         onView(withClassName(endsWith("EditText")));
         onView(withText(startsWith("Hello")));
+
+
+        /* OnData is used in case of ListView,GridView,AdapterView*/
+        onData(withId(R.id.btn)).atPosition(2).check(matches(isDisplayed()));
+
+        /* Matches with Text on Dialog*/
+        onView(withText(R.string.dialog_msg)).inRoot(isDialog());
+
+        /* Matches with text which take focus*/
+//        onView(withText(R.string.app_name)).inRoot(isFocusable());
+
+        /*Matches with text in AutoComplete or actionBar Spinner*/
+        onView(withText(R.string.app_name)).inRoot(isPlatformPopup());
+
+        /*Matches with Text which handle event Touchable*/
+        onView(withText(R.string.app_name)).inRoot(isTouchable());
+
+
+
+
 
 
 
